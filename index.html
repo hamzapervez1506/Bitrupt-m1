@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitrupt Trainee</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+    <body class="center" style="background-color: rgb(209, 207, 227);">
+        <div class="login">
+            <label class="logo"><a href="https://bitrupt.co/" class="custom-logo-link transparent-custom-logo" rel="home" itemprop="url"><img width="40" height="44" src="https://bitrupt.co/wp-content/uploads/2020/02/BITRUPTdone-2-60x64.png" class="custom-logo" alt="Bitrupt" loading="lazy" srcset="https://bitrupt.co/wp-content/uploads/2020/02/BITRUPTdone-2-60x64.png 60w, https://bitrupt.co/wp-content/uploads/2020/02/BITRUPTdone-2-282x300.png 282w, https://bitrupt.co/wp-content/uploads/2020/02/BITRUPTdone-2.png 536w" sizes="(max-width: 60px) 100vw, 60px"></a></label>
+
+            <form id="login-form" action="./home.html" novalidate>
+                <input id="email" type="email" name="email" placeholder="Email">
+                <input id="password" type="password" name="password" placeholder="Password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </body>
+</html>
+
+<script>
+    const loginForm = document.getElementById('login-form')
+
+    function validateEmail(mail) 
+    {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)
+    }
+
+    loginForm.addEventListener('submit', function(e) {
+        let allowSubmit = false;
+
+        // email
+        if (loginForm['email'].value === '') {
+            alert("Email cannot be empty.")
+        } else if (!validateEmail(loginForm['email'].value)) {
+            alert("Email must be valid.")
+        } else {
+            allowSubmit = true;
+        }
+
+        if (allowSubmit) {
+            allowSubmit = false;
+
+            // password
+            const password = loginForm['password'].value
+            // length of 8
+            if (password.length < 8) {
+                alert("Length of password cannot be less than 8 characters.")
+            }
+            // one number
+            else if (! /\d/.test(password)) {
+                alert("Password must contain one number.")
+            }
+            // one capital letter
+            else if (! /[A-Z]/.test(password)) {
+                alert("Password must contain one capital letter.")
+            }
+            // at least one symbol
+            else if (! /[$-/:-?{-~!"^_`\[\]]/.test(password)) {
+                alert("Password must contain one symbol.")
+            }
+            else {
+                allowSubmit = true;
+            }
+        }
+        
+        if (! allowSubmit) {
+            e.preventDefault()
+        }
+    })
+</script>
